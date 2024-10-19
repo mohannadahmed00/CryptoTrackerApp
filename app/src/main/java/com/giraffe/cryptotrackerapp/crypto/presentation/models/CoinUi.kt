@@ -1,11 +1,9 @@
 package com.giraffe.cryptotrackerapp.crypto.presentation.models
 
 import androidx.annotation.DrawableRes
-import com.giraffe.cryptotrackerapp.core.getDrawableIdForCoin
+import com.giraffe.cryptotrackerapp.core.presentation.util.getDrawableIdForCoin
 import com.giraffe.cryptotrackerapp.core.toDisplayableNumber
 import com.giraffe.cryptotrackerapp.crypto.domain.entities.CoinEntity
-import java.text.NumberFormat
-import java.util.Locale
 
 data class CoinUi(
     val id: String,

@@ -1,4 +1,4 @@
-package com.giraffe.cryptotrackerapp.core
+package com.giraffe.cryptotrackerapp.core.presentation.util
 
 import com.giraffe.cryptotrackerapp.R
 

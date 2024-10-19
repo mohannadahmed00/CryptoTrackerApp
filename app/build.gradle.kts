@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    kotlin("plugin.serialization") version "1.4.21"
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -70,6 +70,9 @@ dependencies {
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.client.cio)
     implementation(libs.koin)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.lifecycle.viewmodel.compose)
 
 }

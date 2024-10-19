@@ -7,5 +7,6 @@ import com.giraffe.cryptotrackerapp.crypto.presentation.models.CoinUi
 data class CoinsListScreenState(
     val isLoading: Boolean = false,
     val coinsList: List<CoinUi> = emptyList(),
-    val selectedCoin: CoinUi? = null
+    val selectedCoin: CoinUi? = null,
+    val errorMsg: String? = null
 )

@@ -50,7 +50,7 @@ fun PriceChange(price: DisplayableNumber, modifier: Modifier = Modifier) {
             contentDescription = null,
             tint = contentColor
         )
-        Text(text = "${price.formatted} %", color = contentColor, fontSize = 14.sp)
+        Text(text = "${price.formatted}%", color = contentColor, fontSize = 14.sp)
 
     }
 }

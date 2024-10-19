@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,8 +32,8 @@ fun CoinItem(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .clickable(onClick = onClick),
+
+            .clickable(onClick = onClick).padding(8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -40,19 +41,19 @@ fun CoinItem(
             modifier = Modifier.size(85.dp),
             imageVector = ImageVector.vectorResource(coinUi.iconRes),
             contentDescription = coinUi.name,
+            tint = MaterialTheme.colorScheme.primary
         )
         Column(
             modifier = Modifier.weight(1f)
         ) {
-            Text(text = coinUi.symbol, fontWeight = FontWeight.Bold, fontSize = 20.sp)
-            Text(text = coinUi.name, fontWeight = FontWeight.Normal, fontSize = 14.sp)
+            Text(text = coinUi.symbol, fontWeight = FontWeight.Bold, fontSize = 20.sp, color = MaterialTheme.colorScheme.primary)
+            Text(text = coinUi.name, fontWeight = FontWeight.Normal, fontSize = 14.sp, color = MaterialTheme.colorScheme.secondary)
         }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "$ ${coinUi.priceUsd.formatted}",
-                fontWeight = FontWeight.Bold,
+                text = "${coinUi.priceUsd.formatted}$",
                 fontSize = 18.sp
             )
             PriceChange(price = coinUi.priceUsd)

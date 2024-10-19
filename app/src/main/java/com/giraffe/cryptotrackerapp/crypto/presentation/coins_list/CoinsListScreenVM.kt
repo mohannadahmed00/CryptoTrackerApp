@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class CoinsListVM(
+class CoinsListScreenVM(
     private val fetchCoinsUseCase: FetchCoinsUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow(CoinsListScreenState())
@@ -35,14 +35,14 @@ class CoinsListVM(
                 }
                 .onError { error ->
                     _state.update {
-                        it.copy(isLoading = false)
+                        it.copy(isLoading = false, errorMsg = error.name)
                     }
                 }
         }
     }
 
-    fun onAction(action:CoinsListScreenActions){
-        when(action){
+    fun onAction(action: CoinsListScreenActions) {
+        when (action) {
             is CoinsListScreenActions.OnCoinClick -> {}
         }
     }

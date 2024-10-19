@@ -7,7 +7,7 @@ data class CoinResponse(
     val changePercent24Hr: Double,
     val id: String,
     val marketCapUsd: Double,
-    val maxSupply: String,
+    val maxSupply: String?,
     val name: String,
     val priceUsd: Double,
     val rank: Int,

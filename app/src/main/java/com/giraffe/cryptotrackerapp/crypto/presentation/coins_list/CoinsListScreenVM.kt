@@ -6,9 +6,11 @@ import com.giraffe.cryptotrackerapp.core.domain.util.onError
 import com.giraffe.cryptotrackerapp.core.domain.util.onSuccess
 import com.giraffe.cryptotrackerapp.crypto.domain.usecases.FetchCoinsUseCase
 import com.giraffe.cryptotrackerapp.crypto.presentation.models.toCoinUi
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -20,6 +22,8 @@ class CoinsListScreenVM(
     val state = _state.onStart {
         fetchCoins()
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), CoinsListScreenState())
+    private val _events = Channel<CoinsListScreenEvents>()
+    val events = _events.receiveAsFlow()
 
     private fun fetchCoins() {
         viewModelScope.launch {
@@ -30,13 +34,14 @@ class CoinsListScreenVM(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            coinsList = coins.map { coin -> coin.toCoinUi() })
+                            coinsList = coins.map { coin -> coin.toCoinUi() },
+                            networkError = null
+                        )
                     }
                 }
                 .onError { error ->
-                    _state.update {
-                        it.copy(isLoading = false, errorMsg = error.name)
-                    }
+                    _state.update { it.copy(isLoading = false, networkError = error) }
+                    _events.send(CoinsListScreenEvents.Error(error))
                 }
         }
     }
@@ -44,6 +49,7 @@ class CoinsListScreenVM(
     fun onAction(action: CoinsListScreenActions) {
         when (action) {
             is CoinsListScreenActions.OnCoinClick -> {}
+            CoinsListScreenActions.OnRefresh -> fetchCoins()
         }
     }
 }

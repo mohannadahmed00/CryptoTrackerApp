@@ -33,7 +33,8 @@ fun CoinItem(
         modifier = modifier
             .fillMaxWidth()
 
-            .clickable(onClick = onClick).padding(8.dp),
+            .clickable(onClick = onClick)
+            .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -46,8 +47,18 @@ fun CoinItem(
         Column(
             modifier = Modifier.weight(1f)
         ) {
-            Text(text = coinUi.symbol, fontWeight = FontWeight.Bold, fontSize = 20.sp, color = MaterialTheme.colorScheme.primary)
-            Text(text = coinUi.name, fontWeight = FontWeight.Normal, fontSize = 14.sp, color = MaterialTheme.colorScheme.secondary)
+            Text(
+                text = coinUi.symbol,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                text = coinUi.name,
+                fontWeight = FontWeight.Normal,
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.secondary
+            )
         }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally

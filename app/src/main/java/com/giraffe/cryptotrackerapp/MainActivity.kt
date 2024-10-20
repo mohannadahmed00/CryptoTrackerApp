@@ -12,12 +12,13 @@ import com.giraffe.cryptotrackerapp.crypto.presentation.coins_list.CoinsListScre
 import com.giraffe.cryptotrackerapp.ui.theme.CryptoTrackerAppTheme
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             CryptoTrackerAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(modifier = Modifier.fillMaxSize()) {
                     CoinsListScreen()
                 }
             }

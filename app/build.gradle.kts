@@ -74,5 +74,6 @@ dependencies {
     implementation(libs.koin)
     implementation(libs.koin.androidx.compose)
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.material.icons.extended)
 
 }

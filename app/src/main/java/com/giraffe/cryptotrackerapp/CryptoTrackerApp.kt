@@ -1,7 +1,7 @@
 package com.giraffe.cryptotrackerapp
 
 import android.app.Application
-import com.giraffe.cryptotrackerapp.di.appModule
+import com.giraffe.cryptotrackerapp.core.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

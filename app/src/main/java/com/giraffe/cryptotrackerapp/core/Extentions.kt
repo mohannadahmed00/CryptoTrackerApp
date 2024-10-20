@@ -1,6 +1,6 @@
 package com.giraffe.cryptotrackerapp.core
 
-import com.giraffe.cryptotrackerapp.crypto.presentation.models.DisplayableNumber
+import com.giraffe.cryptotrackerapp.presentation.models.DisplayableNumber
 import java.text.NumberFormat
 import java.util.Locale
 

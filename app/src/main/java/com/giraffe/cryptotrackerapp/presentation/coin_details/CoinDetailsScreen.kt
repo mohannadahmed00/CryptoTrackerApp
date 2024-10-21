@@ -1,6 +1,7 @@
 package com.giraffe.cryptotrackerapp.presentation.coin_details
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -9,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -97,7 +100,6 @@ fun CoinDetailsContent(
                 } else {
                     MaterialTheme.colorScheme.onError
                 }
-
                 InfoCard(
                     icon = if (isPositive) Icons.Rounded.ArrowOutward else Icons.Rounded.ArrowDownward,
                     title = stringResource(R.string.change_last_24h),
@@ -106,6 +108,14 @@ fun CoinDetailsContent(
                 )
 
             }
+            Box(modifier = Modifier.weight(1f)){
+                LazyColumn {
+                    items(state.priceHistory){
+                        Text(it.priceUsd)
+                    }
+                }
+            }
+
         }
 
     }

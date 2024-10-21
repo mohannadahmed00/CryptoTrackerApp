@@ -6,6 +6,7 @@ import com.giraffe.cryptotrackerapp.data.datasources.remote.RemoteDataSourceImp
 import com.giraffe.cryptotrackerapp.data.repository.RepositoryImp
 import com.giraffe.cryptotrackerapp.domain.repository.Repository
 import com.giraffe.cryptotrackerapp.domain.usecases.FetchCoinsUseCase
+import com.giraffe.cryptotrackerapp.domain.usecases.GetCoinPriceHistoryUseCase
 import com.giraffe.cryptotrackerapp.presentation.coins_list.CoinsListScreenVM
 import io.ktor.client.engine.cio.CIO
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -18,5 +19,6 @@ val appModule = module {
     singleOf(::RemoteDataSourceImp).bind<RemoteDataSource>()
     singleOf(::RepositoryImp).bind<Repository>()
     singleOf(::FetchCoinsUseCase)
+    singleOf(::GetCoinPriceHistoryUseCase)
     viewModelOf(::CoinsListScreenVM)
 }

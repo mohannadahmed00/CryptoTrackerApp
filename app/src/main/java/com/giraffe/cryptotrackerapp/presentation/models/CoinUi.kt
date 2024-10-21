@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import com.giraffe.cryptotrackerapp.core.utils.presentation_util.getDrawableIdForCoin
 import com.giraffe.cryptotrackerapp.core.toDisplayableNumber
 import com.giraffe.cryptotrackerapp.domain.entities.CoinEntity
+import com.giraffe.cryptotrackerapp.presentation.components.chart.DataPoint
 
 data class CoinUi(
     val id: String,
@@ -13,7 +14,8 @@ data class CoinUi(
     val priceUsd: DisplayableNumber,
     val marketCapUsd: DisplayableNumber,
     val changePercent24Hr: DisplayableNumber,
-    @DrawableRes val iconRes: Int
+    @DrawableRes val iconRes: Int,
+    val priceHistory: List<DataPoint> = emptyList()
 )
 
 data class DisplayableNumber(

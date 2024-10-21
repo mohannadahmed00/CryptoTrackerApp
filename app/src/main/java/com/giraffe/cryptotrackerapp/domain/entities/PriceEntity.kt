@@ -1,6 +1,8 @@
 package com.giraffe.cryptotrackerapp.domain.entities
 
+import java.time.ZonedDateTime
+
 data class PriceEntity(
     val priceUsd: String,
-    val time: Long
+    val dateTime: ZonedDateTime
 )

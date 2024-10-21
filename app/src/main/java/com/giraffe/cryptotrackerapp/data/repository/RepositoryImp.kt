@@ -18,6 +18,5 @@ class RepositoryImp(
 
     override suspend fun getCoinPriceHistory(id: String): Resource<List<PriceEntity>, NetworkError> {
         return remoteDataSource.getCoinPriceHistory(id).map { it.map { price -> price.toEntity() } }
-
     }
 }

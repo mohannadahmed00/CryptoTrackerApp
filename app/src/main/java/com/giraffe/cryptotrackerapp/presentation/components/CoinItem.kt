@@ -67,7 +67,7 @@ fun CoinItem(
                 text = "${coinUi.priceUsd.formatted}$",
                 fontSize = 18.sp
             )
-            PriceChange(price = coinUi.priceUsd)
+            PriceChange(price = coinUi.changePercent24Hr)
         }
     }
 }

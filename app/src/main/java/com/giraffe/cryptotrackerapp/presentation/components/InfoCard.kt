@@ -32,7 +32,8 @@ fun InfoCard(
     title: String,
     formattedText: String,
     icon: ImageVector,
-    contentColor: Color = MaterialTheme.colorScheme.onSurface
+    contentColor: Color = MaterialTheme.colorScheme.onSurface,
+    borderColor: Color = MaterialTheme.colorScheme.primary
 ) {
     Card(
         modifier = modifier
@@ -40,11 +41,11 @@ fun InfoCard(
             .shadow(
                 elevation = 15.dp,
                 shape = RectangleShape,
-                ambientColor = MaterialTheme.colorScheme.primary,
-                spotColor = MaterialTheme.colorScheme.primary,
+                ambientColor = borderColor,
+                spotColor = borderColor,
             ),
         shape = RectangleShape,
-        border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.primary),
+        border = BorderStroke(1.dp, color = borderColor),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainer,
             contentColor = contentColor

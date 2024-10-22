@@ -102,7 +102,17 @@ fun CoinDetailsContent(
                 InfoCard(
                     icon = if (isPositive) Icons.Rounded.ArrowOutward else Icons.Rounded.ArrowDownward,
                     title = stringResource(R.string.change_last_24h),
-                    formattedText = "$ ${absoluteChangeFormatted.formatted}",
+                    formattedText = absoluteChangeFormatted.formatted,
+                    contentColor = if (isPositive) {
+                        MaterialTheme.colorScheme.tertiary
+                    } else {
+                        MaterialTheme.colorScheme.error
+                    },
+                    borderColor = if (isPositive) {
+                        MaterialTheme.colorScheme.tertiary
+                    } else {
+                        MaterialTheme.colorScheme.error
+                    }
                 )
 
             }

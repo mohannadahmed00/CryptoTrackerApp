@@ -7,14 +7,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,10 +26,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.giraffe.cryptotrackerapp.core.utils.presentation_util.toString
-import com.giraffe.cryptotrackerapp.presentation.viewmodel.CoinsSharedState
-import com.giraffe.cryptotrackerapp.presentation.viewmodel.CoinsSharedVM
 import com.giraffe.cryptotrackerapp.presentation.components.CoinItem
 import com.giraffe.cryptotrackerapp.presentation.components.previewCoinUi
+import com.giraffe.cryptotrackerapp.presentation.viewmodel.CoinsSharedState
+import com.giraffe.cryptotrackerapp.presentation.viewmodel.CoinsSharedVM
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -48,6 +52,22 @@ fun CoinsListContent(
     actions: (action: CoinsListScreenActions) -> Unit = {}
 ) {
     val context = LocalContext.current
+    val lazyListState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
+    LaunchedEffect(true) {
+        scope.launch {
+            val coin = state.coinsList.firstOrNull {
+                it.id == state.selectedCoin?.id
+            }
+            coin?.let { item ->
+                val itemIndex = state.coinsList.indexOf(item)
+                lazyListState.scrollToItem(itemIndex)
+            }
+
+        }
+    }
+
+
     Box(
         modifier = modifier
             .fillMaxSize(),
@@ -68,6 +88,7 @@ fun CoinsListContent(
             }
         } else {
             LazyColumn(
+                state = lazyListState,
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {

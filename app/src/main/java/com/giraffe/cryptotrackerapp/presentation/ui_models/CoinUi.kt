@@ -1,4 +1,4 @@
-package com.giraffe.cryptotrackerapp.presentation.models
+package com.giraffe.cryptotrackerapp.presentation.ui_models
 
 import androidx.annotation.DrawableRes
 import com.giraffe.cryptotrackerapp.core.utils.presentation_util.getDrawableIdForCoin

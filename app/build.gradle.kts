@@ -75,5 +75,6 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.material.icons.extended)
+    implementation(libs.androidx.compose.material3.adaptive.navigation)
 
 }

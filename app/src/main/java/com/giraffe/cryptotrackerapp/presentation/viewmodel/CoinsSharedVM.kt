@@ -1,4 +1,4 @@
-package com.giraffe.cryptotrackerapp.presentation.coins_list
+package com.giraffe.cryptotrackerapp.presentation.viewmodel
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
@@ -7,8 +7,9 @@ import com.giraffe.cryptotrackerapp.core.utils.domain_util.onError
 import com.giraffe.cryptotrackerapp.core.utils.domain_util.onSuccess
 import com.giraffe.cryptotrackerapp.domain.usecases.FetchCoinsUseCase
 import com.giraffe.cryptotrackerapp.domain.usecases.GetCoinPriceHistoryUseCase
+import com.giraffe.cryptotrackerapp.presentation.coins_list.CoinsListScreenActions
 import com.giraffe.cryptotrackerapp.presentation.components.chart.DataPoint
-import com.giraffe.cryptotrackerapp.presentation.models.toCoinUi
+import com.giraffe.cryptotrackerapp.presentation.ui_models.toCoinUi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,15 +21,15 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter
 
-class CoinsListScreenVM(
+class CoinsSharedVM(
     private val fetchCoinsUseCase: FetchCoinsUseCase,
     private val getCoinPriceHistoryUseCase: GetCoinPriceHistoryUseCase,
 ) : ViewModel() {
-    private val _state = MutableStateFlow(CoinsListScreenState())
+    private val _state = MutableStateFlow(CoinsSharedState())
     val state = _state.onStart {
         fetchCoins()
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), CoinsListScreenState())
-    private val _events = Channel<CoinsListScreenEvents>()
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), CoinsSharedState())
+    private val _events = Channel<CoinsSharedEvents>()
     val events = _events.receiveAsFlow()
 
     private fun fetchCoins() {
@@ -47,7 +48,7 @@ class CoinsListScreenVM(
                 }
                 .onError { error ->
                     _state.update { it.copy(isLoading = false, networkError = error) }
-                    _events.send(CoinsListScreenEvents.Error(error))
+                    _events.send(CoinsSharedEvents.Error(error))
                 }
         }
     }
@@ -55,7 +56,6 @@ class CoinsListScreenVM(
     @SuppressLint("NewApi")
     private fun getCoinPriceHistory(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _state.update { it.copy(isLoading = true) }
             getCoinPriceHistoryUseCase(id)
                 .onSuccess { priceHistory ->
                     val dataPoints = priceHistory

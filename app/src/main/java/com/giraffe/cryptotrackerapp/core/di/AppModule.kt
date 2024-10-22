@@ -7,7 +7,7 @@ import com.giraffe.cryptotrackerapp.data.repository.RepositoryImp
 import com.giraffe.cryptotrackerapp.domain.repository.Repository
 import com.giraffe.cryptotrackerapp.domain.usecases.FetchCoinsUseCase
 import com.giraffe.cryptotrackerapp.domain.usecases.GetCoinPriceHistoryUseCase
-import com.giraffe.cryptotrackerapp.presentation.coins_list.CoinsListScreenVM
+import com.giraffe.cryptotrackerapp.presentation.viewmodel.CoinsSharedVM
 import io.ktor.client.engine.cio.CIO
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
@@ -20,5 +20,5 @@ val appModule = module {
     singleOf(::RepositoryImp).bind<Repository>()
     singleOf(::FetchCoinsUseCase)
     singleOf(::GetCoinPriceHistoryUseCase)
-    viewModelOf(::CoinsListScreenVM)
+    viewModelOf(::CoinsSharedVM)
 }

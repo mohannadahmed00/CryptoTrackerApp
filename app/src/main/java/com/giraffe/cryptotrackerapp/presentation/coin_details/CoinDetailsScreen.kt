@@ -39,8 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.giraffe.cryptotrackerapp.R
 import com.giraffe.cryptotrackerapp.core.toDisplayableNumber
-import com.giraffe.cryptotrackerapp.presentation.coins_list.CoinsListScreenState
-import com.giraffe.cryptotrackerapp.presentation.coins_list.CoinsListScreenVM
+import com.giraffe.cryptotrackerapp.presentation.viewmodel.CoinsSharedState
+import com.giraffe.cryptotrackerapp.presentation.viewmodel.CoinsSharedVM
 import com.giraffe.cryptotrackerapp.presentation.coins_list.previewState
 import com.giraffe.cryptotrackerapp.presentation.components.InfoCard
 import com.giraffe.cryptotrackerapp.presentation.components.chart.ChartStyle
@@ -51,7 +51,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun CoinDetailsScreen(
     modifier: Modifier = Modifier,
-    viewModel: CoinsListScreenVM = koinViewModel()
+    viewModel: CoinsSharedVM = koinViewModel()
 ) {
     val state by viewModel.state.collectAsState()
     CoinDetailsContent(
@@ -64,7 +64,7 @@ fun CoinDetailsScreen(
 @Composable
 fun CoinDetailsContent(
     modifier: Modifier = Modifier,
-    state: CoinsListScreenState = previewState,
+    state: CoinsSharedState = previewState,
 ) {
     Column(
         modifier = modifier
@@ -103,7 +103,6 @@ fun CoinDetailsContent(
                     icon = if (isPositive) Icons.Rounded.ArrowOutward else Icons.Rounded.ArrowDownward,
                     title = stringResource(R.string.change_last_24h),
                     formattedText = "$ ${absoluteChangeFormatted.formatted}",
-                    //contentColor = contentColor
                 )
 
             }

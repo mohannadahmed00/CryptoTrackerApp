@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.giraffe.cryptotrackerapp.R
 import com.giraffe.cryptotrackerapp.core.toDisplayableNumber
-import com.giraffe.cryptotrackerapp.presentation.models.CoinUi
+import com.giraffe.cryptotrackerapp.presentation.ui_models.CoinUi
 
 @Composable
 fun CoinItem(

@@ -11,11 +11,11 @@ import com.giraffe.cryptotrackerapp.presentation.coins_list.CoinsListScreenActio
 import com.giraffe.cryptotrackerapp.presentation.components.chart.DataPoint
 import com.giraffe.cryptotrackerapp.presentation.ui_models.toCoinUi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -29,8 +29,8 @@ class CoinsSharedVM(
     val state = _state.onStart {
         fetchCoins()
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), CoinsSharedState())
-    private val _events = Channel<CoinsSharedEvents>()
-    val events = _events.receiveAsFlow()
+    private val _events = MutableSharedFlow<CoinsSharedEvents>()
+    val events = _events.asSharedFlow()
 
     private fun fetchCoins() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -48,7 +48,7 @@ class CoinsSharedVM(
                 }
                 .onError { error ->
                     _state.update { it.copy(isLoading = false, networkError = error) }
-                    _events.send(CoinsSharedEvents.Error(error))
+                    _events.emit(CoinsSharedEvents.Error(error))
                 }
         }
     }
